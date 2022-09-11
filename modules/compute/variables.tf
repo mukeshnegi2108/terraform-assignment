@@ -1,26 +1,31 @@
 data "aws_ami" "dafault_ami" {
   most_recent = true
-  owners      = ["aws"]
+  owners = ["aws"]
 }
 
 variable "ami" {
-  type    = string
-  default = "ami-0f36dcfcc94112ea1"
+  type = string
+  default = data.aws_ami.default_ami.id
+}
+
+variable "hostname" {
+  type = string
+  default = "application"
 }
 
 variable "instance_type" {
-  type    = string
+  type = string
   default = "t2.micro"
 }
 
 variable "instance_profile" {
-  type    = string
-  default = ""
+  type = string
+  default = []
 }
 
 variable "security_group" {
-  type    = string
-  default = ""
+  type = string
+  default = []
 }
 
 variable "tags" {

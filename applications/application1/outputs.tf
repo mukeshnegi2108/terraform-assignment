@@ -6,10 +6,10 @@ output "sg_details" {
   value = module.application-security.securitygroup_id
 }
 
-output "details" {
+output "bucket_name" {
   value = module.application-storage.bucketname
 }
 
-output "Application_server" {
+output "application_server" {
   value = module.application.describe_ec2
 }
