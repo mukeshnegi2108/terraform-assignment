@@ -1,13 +1,13 @@
 resource "aws_s3_bucket" "s3_resource" {
   bucket = "${var.region}-${var.bucket_name}-${timestamp()}"
   acl    = var.bucket_acl
-  tags = var.tags
+  tags   = var.tags
 
   # Enable encryption
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
-        sse_algorithm     = var.encryption_algorithm
+        sse_algorithm = var.encryption_algorithm
       }
     }
   }

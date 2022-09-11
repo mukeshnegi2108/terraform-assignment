@@ -18,10 +18,10 @@ module "application-security" {
   tags = local.common_tags
 }
 
-module "application-monitoring" {
-  source = "../../modules/monitoring"
-  tags = local.common_tags
-}
+#module "application-monitoring" {
+#  source = "../../modules/monitoring"
+#  tags = local.common_tags
+#}
 
 module "application-storage" {
   source = "../../modules/storage"

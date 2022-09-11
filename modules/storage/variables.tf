@@ -1,15 +1,15 @@
 variable "bucket_acl" {
-  type = string
+  type    = string
   default = "private"
 }
 
 variable "encryption_algorithm" {
-  type = string
+  type    = string
   default = "aws:kms"
 }
 
 variable "bucket_versioning" {
-  type = string
+  type    = string
   default = "Enabled"
 }
 

@@ -4,19 +4,19 @@ resource "aws_vpc" "custom-vpc" {
     {
       Name = ApplicationVPC
     },
-    var.tags)
+  var.tags)
 }
 
 resource "aws_subnet" "public" {
   vpc_id            = aws_vpc.custom-vpc.id
   cidr_block        = var.subnet_cidr_range
   availability_zone = var.availability_zone
-  tags = var.tags
+  tags              = var.tags
 }
 
 resource "aws_route_table" "vpc-route-table" {
   vpc_id = aws_vpc.custom-vpc.id
-  tags = var.tags
+  tags   = var.tags
 }
 
 resource "aws_route_table_association" "public" {
@@ -26,7 +26,7 @@ resource "aws_route_table_association" "public" {
 
 resource "aws_internet_gateway" "vpc-igw" {
   vpc_id = aws_vpc.custom-vpc.id
-  tags = var.tags
+  tags   = var.tags
 }
 
 resource "aws_route" "internet-route" {
