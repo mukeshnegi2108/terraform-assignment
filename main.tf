@@ -1,8 +1,6 @@
 # Provider and Region details
 provider "aws" {
   region     = var.aws_region
-  access_key = AKIAZWMPLZUOZD4TNA6B
-  secret_key = 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
 }
 
 module "app-infrastructure" {
