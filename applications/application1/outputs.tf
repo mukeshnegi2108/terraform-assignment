@@ -11,5 +11,5 @@ output "bucket_name" {
 }
 
 output "application_server" {
-  value = module.application.describe_ec2
+  value = module.application.ec2_ip
 }
