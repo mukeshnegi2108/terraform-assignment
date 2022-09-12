@@ -1,33 +1,44 @@
-data "aws_ami" "dafault_ami" {
+data "aws_ami" "amazon-linux-2" {
   most_recent = true
-  owners = ["aws"]
+
+  filter {
+    name   = "owner-alias"
+    values = ["amazon"]
+  }
+
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm-*-x86_64-ebs"]
+  }
 }
 
 variable "ami" {
-  type = string
-  default = data.aws_ami.default_ami.id
+  type    = string
+  default = "ami-09e2d756e7d78558d"
 }
 
-variable "hostname" {
-  type = string
-  default = "application"
+variable "application_name" {
+  type    = string
+  default = "default-application"
 }
 
 variable "instance_type" {
-  type = string
+  type    = string
   default = "t2.micro"
 }
 
 variable "instance_profile" {
-  type = string
-  default = []
+  type    = string
+  default = ""
 }
 
 variable "security_group" {
-  type = string
-  default = []
+  type    = string
+  default = ""
 }
 
-variable "tags" {
-  default = null
-}
+variable "tags" {}
+
+variable "subnet_id" {}
+
+variable "webapp_user" {}

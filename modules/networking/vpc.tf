@@ -4,7 +4,7 @@ resource "aws_vpc" "custom-vpc" {
     {
       Name = "${var.vpc_name}"
     },
-    var.tags)
+  var.tags)
 }
 
 resource "aws_subnet" "public" {
@@ -15,7 +15,7 @@ resource "aws_subnet" "public" {
     {
       Name = "${var.subnet_name}"
     },
-    var.tags)
+  var.tags)
 }
 
 resource "aws_route_table" "vpc-route-table" {
@@ -24,7 +24,7 @@ resource "aws_route_table" "vpc-route-table" {
     {
       Name = "${var.route_table_name}"
     },
-    var.tags)
+  var.tags)
 }
 
 resource "aws_route_table_association" "public" {
@@ -38,7 +38,7 @@ resource "aws_internet_gateway" "vpc-igw" {
     {
       Name = "${var.igw_name}"
     },
-    var.tags)
+  var.tags)
 }
 
 resource "aws_route" "internet-route" {
