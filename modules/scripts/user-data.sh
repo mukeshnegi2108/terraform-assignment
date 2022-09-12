@@ -7,7 +7,10 @@ exec > >(tee /var/log/user-data.log|logger -t user-data-extra -s 2>/dev/console)
 sudo yum update -y
 
 # Install nginx webserver
-sudo yum install -y nginx
+sudo yum update -y
+sudo amazon-linux-extras install nginx1 -y 
+sudo systemctl enable nginx
+sudo systemctl start nginx
 
 # Configure Cloudwatch agent
 wget https://s3.amazonaws.com/amazoncloudwatch-agent/amazon_linux/amd64/latest/amazon-cloudwatch-agent.rpm
