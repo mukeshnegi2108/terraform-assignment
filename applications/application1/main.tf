@@ -18,11 +18,6 @@ module "application-security" {
   tags                = local.common_tags
 }
 
-# module "application-monitoring" {
-#   source = "../../modules/monitoring"
-#   tags = local.common_tags
-# }
-
 module "application-storage" {
   source      = "../../modules/storage"
   bucket_name = "${var.application_name}-bucket"
@@ -34,7 +29,6 @@ module "application-storage" {
 module "application" {
   source           = "../../modules/compute"
   application_name = var.application_name
-  webapp_user      = var.webapp_user
   ami              = data.aws_ami.app_ami.id
   instance_type    = var.instance_type
   instance_profile = module.application-security.profile_name

@@ -47,4 +47,3 @@ variable "region" {
 
 variable "ingress_allowed_ips" {}
 
-variable "webapp_user" {}
