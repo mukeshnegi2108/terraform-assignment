@@ -6,13 +6,14 @@ terraform {
   }
   backend "s3" {
     bucket         = "state-bucket-my-personal-assessment"
-    region         = "${var.aws_region}"
-    key            = "/region/application/terraform.tfstate"
+    region         = "us-east-1"
+    key            = "region/terraform.tfstate"
     dynamodb_table = "terraform_locks"
   }
 }
 
-# Provider and Region details
+# Provider, Region and aws profile details
 provider "aws" {
-  region     = "us-east-1"
+  region  = "us-east-1"
+  profile = "my-account"
 }
