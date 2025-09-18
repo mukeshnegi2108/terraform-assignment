@@ -1,0 +1,55 @@
+name: Pre-commit Checks
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    name: Pre-commit Checks
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.5.0
+
+    - name: Install pre-commit
+      run: pip install pre-commit
+
+    - name: Install terraform-docs
+      run: |
+        curl -sSLo ./terraform-docs.tar.gz https://github.com/terraform-docs/terraform-docs/releases/download/v0.16.0/terraform-docs-v0.16.0-linux-amd64.tar.gz
+        tar -xzf terraform-docs.tar.gz
+        chmod +x terraform-docs
+        sudo mv terraform-docs /usr/local/bin/
+
+    - name: Install tflint
+      run: |
+        curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+
+    - name: Run terraform fmt
+      run: terraform fmt -check -recursive
+
+    - name: Validate Terraform files
+      run: |
+        for dir in $(find . -name "*.tf" -exec dirname {} \; | sort -u); do
+          echo "Validating $dir"
+          (cd "$dir" && terraform init -backend=false && terraform validate)
+        done
+
+    - name: Run tflint
+      run: |
+        tflint --init
+        tflint --recursive
