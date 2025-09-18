@@ -1,19 +1,31 @@
 terraform {
+  required_version = ">= 1.0"
+  
   required_providers {
     aws = {
-      version = "~> 4.0"
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.1"
     }
   }
-  backend "s3" {
-    bucket         = "state-bucket-my-personal-assessment"
-    region         = "us-east-1"
-    key            = "region/terraform.tfstate"
-    dynamodb_table = "terraform_locks"
-  }
+  
+  # Backend configuration should be provided via backend config file or CLI
+  # backend "s3" {
+  #   # Configuration moved to backend.tf or provided via -backend-config
+  # }
 }
 
-# Provider, Region and aws profile details
+# Provider configuration
 provider "aws" {
-  region  = "us-east-1"
-  profile = "my-account"
+  region = var.region
+  
+  # Use environment variables or AWS config instead of hardcoded profile
+  # profile = var.aws_profile  # Optional, can be set via variable
+  
+  default_tags {
+    tags = local.common_tags
+  }
 }
